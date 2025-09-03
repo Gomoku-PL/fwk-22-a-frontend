@@ -2,7 +2,7 @@ import { io } from "socket.io-client"
 export let socket
 
 export function connect() {
-    socket = io("https://localhost:3000")  // jag måste fråga min grupp vad de har för localhost i backend på torsdag
+    socket = io("https://localhost:4000")  // jag måste fråga min grupp vad de har för localhost i backend på torsdag
 
     socket.on("connet", () => {
         console.log(" sockdt connected:", socket.id)
