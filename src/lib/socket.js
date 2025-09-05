@@ -1,26 +1,33 @@
-import { io } from "socket.io-client"
-export let socket
+import { io } from "socket.io-client";
+
+export let socket;
 
 export function connect() {
-    socket = io("https://localhost:4000")  // jag måste fråga min grupp vad de har för localhost i backend på torsdag
+    // Om backend körs lokalt, använd http://localhost:4000 (inte https)
+    socket = io("http://localhost:4000");
 
-    socket.on("connet", () => {
-        console.log(" sockdt connected:", socket.id)
-    })
+    // OBS: Eventet heter "connect", inte "connet"
+    socket.on("connect", () => {
+        console.log("🔌 Socket connected:", socket.id);
+    });
 }
+
 export function joinRoom(roomId) {
     if (socket) {
-        socket.emit("join", roomId)
-        console.log("join room:", roomId)
+        socket.emit("join", roomId);
+        console.log("🚪 Joined room:", roomId);
     }
 }
+
 export function on(event, callback) {
     if (socket) {
-        socket.on(EventTarget, callback)
+        // Var noga med att använda 'event', inte 'EventTarget'
+        socket.on(event, callback);
     }
 }
+
 export function off(event) {
     if (socket) {
-        socket.off(event)
+        socket.off(event);
     }
 }
