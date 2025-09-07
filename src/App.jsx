@@ -1,15 +1,18 @@
-import BoardWrapper from './components/board/BoardWrapper'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import BoardWrapper from "./components/board/BoardWrapper";
 
-function App() {
-
-
+export default function App() {
   return (
-    <>
-      <h1>Gomoku-PL</h1>
-      <BoardWrapper />
+    <Router>
+      <Routes>
+      
+        <Route path="/" element={<Home />} />
 
-    </>
-  )
+       
+        <Route path="/game/tempId" element={<BoardWrapper />} />
+      </Routes>
+    </Router>
+  );
 }
-
-export default App
