@@ -1,8 +1,6 @@
 import React from "react";
-
-// NOTE: If the components package exports Board as default, switch to:
-// import Board from "@gomoku/components";
 import { Board } from "@gomoku/components";
+
 
 export default function Game() {
   return (
