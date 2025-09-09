@@ -1,17 +1,19 @@
 import React from "react";
-import {Board} from "../components/Board";
 
+// NOTE: If the components package exports Board as default, switch to:
+// import Board from "@gomoku/components";
+import { Board } from "@gomoku/components";
 
 export default function Game() {
-    return (
-        <main style = {{padding: 16}}>
-            <h1>Game Board</h1>
+  return (
+    <main style={{ padding: "1rem" }}>
+      <h1>Game Board</h1>
 
-            <section aria-label="Game board" style={{marginTop: 12}}>
-                {/* if props are needed later, add them here */}    
-                <Board />
-            </section>
-        </main>
-    )
+      {/* Board from the shared components package */}
+      <div style={{ marginTop: "1rem" }}>
+        {/* During early integration you can comment this line out if the package isn't wired yet */}
+        <Board />
+      </div>
+    </main>
+  );
 }
-    
