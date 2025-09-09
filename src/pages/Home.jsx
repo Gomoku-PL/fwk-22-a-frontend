@@ -1,0 +1,18 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "fwk-22-a-components/src/ui/Button/Button.jsx";
+
+
+export default function Home() {
+  const navigate = useNavigate();
+
+  return (
+    <div style={{ display: "grid", placeItems: "center", minHeight: "60vh" }}>
+      <Button onClick={() => navigate("/game/tempId")}>
+        Start Game
+      </Button>
+    </div>
+  );
+}
+
+
