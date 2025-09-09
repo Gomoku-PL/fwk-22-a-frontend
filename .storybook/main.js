@@ -15,6 +15,11 @@ const config = {
   "framework": {
     "name": "@storybook/react-vite",
     "options": {}
+  },
+  async viteFinal(cfg) {
+    cfg.resolve ||= {};
+    cfg.resolve.dedupe = ['react', 'react-dom'];
+    return cfg;
   }
 };
 export default config;
