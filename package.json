@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@gomoku/components": "file:../fwk-22-a-components/gomoku-components-1.0.0.tgz",
     "@mdx-js/react": "^3.1.1",
     "fwk-22-a-components": "file:../fwk-22-a-components",
     "react": "^19.1.1",
