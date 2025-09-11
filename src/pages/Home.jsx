@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "fwk-22-a-components";
+import{ Button } from '@gomoku/components';
+
+
+
 
 
 
