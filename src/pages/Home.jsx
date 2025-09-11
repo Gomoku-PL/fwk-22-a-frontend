@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "fwk-22-a-components/src/ui/Button/Button.jsx";
+import { Button } from "fwk-22-a-components";
+
 
 
 export default function Home() {
