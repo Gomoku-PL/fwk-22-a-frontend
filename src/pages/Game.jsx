@@ -14,8 +14,8 @@ export default function Game() {
   }, []);
 
   const handleOpponentMove = (data) => {
-    console.log("📥 Drag från motspelare:", data);
-    // TODO: Uppdatera board state här om det behövs
+    console.log(" Drag från motspelare:", data);
+
   };
 
   const handleMyMove = (position) => {
