@@ -1,6 +1,7 @@
 import React from "react";
 import Game from "./Game";
 
+
 export default {
   title: "Pages/Game",
   component: Game,
