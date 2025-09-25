@@ -1,42 +1,56 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* ======= GOMOKU TEMA ======= */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Noto+Serif+JP:wght@900&display=swap');
+
+:root {
+  --bg1: #0b1020;
+  --bg2: #0f1530;
+  --ink: #e7e9f3;
+  --muted: #9aa1b7;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-brd: rgba(255, 255, 255, 0.18);
+  --accent1: #2563eb;
+  --accent2: #0ea5e9;
+  --accent3: #4f46e5;
+  --last: #2563eb;
+  --wood: #e7d3a5;
+  --line: #7c6a3a;
+  --r-lg: 16px;
+  --r-btn: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 14px/1.35 Montserrat, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: 
+    radial-gradient(900px 540px at 10% -10%, rgba(79, 70, 229, 0.12) 0%, transparent 60%),
+    radial-gradient(820px 480px at 110% 0%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+}
+
+.App {
+  max-width: 1180px;
+  margin: 18px auto;
+  padding: 0 14px;
+}
+
+.App h1 {
   text-align: center;
+  font-size: clamp(26px, 5vw, 48px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #fff, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 2rem;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */

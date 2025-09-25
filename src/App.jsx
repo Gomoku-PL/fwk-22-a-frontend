@@ -1,16 +1,19 @@
-import React from 'react'
-import Home from './pages/Home'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import BoardWrapper from './components/board/BoardWrapper'
-import './App.css'
-import Game from './pages/Game'
- function App() {
+import Home from './pages/Home';
+import Game from './pages/Game';
+import './App.css';
+
+function App() {
   return (
     <div className="App">
       <h1>Gomoku-PL</h1>
-      <Home />
-      <BoardWrapper />
-      <Game />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/game/:roomId" element={<Game />} />
+      </Routes>
     </div>
   );
 }

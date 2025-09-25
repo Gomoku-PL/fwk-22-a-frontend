@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import{ Button } from '@gomoku/components';
-
-
+import { Button } from 'fwk-22-a-components';
 
 
 
@@ -12,7 +10,7 @@ export default function Home() {
 
   return (
     <div style={{ display: "grid", placeItems: "center", minHeight: "60vh" }}>
-      <Button onClick={() => navigate("/game/tempId")}>
+      <Button onClick={() => navigate("/game/roomId")}>
         Start Game
       </Button>
     </div>

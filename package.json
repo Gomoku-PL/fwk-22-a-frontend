@@ -1,7 +1,7 @@
 {
   "name": "fwk-22-a-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,12 +12,12 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@gomoku/components": "file:../fwk-22-a-components/gomoku-components-1.0.0.tgz",
     "@mdx-js/react": "^3.1.1",
     "fwk-22-a-components": "file:../fwk-22-a-components",
+    "path-browserify": "^1.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.8.2",
+    "react-router-dom": "^7.9.1",
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
