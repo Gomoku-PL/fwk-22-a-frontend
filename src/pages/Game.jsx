@@ -16,7 +16,7 @@ export default function Game() {
     moveCount > 0
       ? { row: moves[moveCount - 1].row, col: moves[moveCount - 1].col }
       : null;
-  const winner = null; // not in scope for this step
+
   const boardSize = 15; // adjust if your board is a different size
 
   useEffect(() => {
