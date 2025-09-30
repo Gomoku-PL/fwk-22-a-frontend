@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    # We read vars from the 'production' Environment in repo Settings → Environments
+    # Reads variables from the 'production' Environment (set this up in repo Settings → Environments)
     environment: production
     runs-on: ubuntu-latest
 
@@ -24,12 +24,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          # Disable cache to avoid the Rollup optional-deps bug on CI
+          cache: 'none'
 
-      - name: Install deps
-        run: npm ci
+      # Clean install to work around npm+rollup optional deps issue on Linux runners
+      - name: Clean install (workaround for Rollup optional deps)
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --no-audit
 
-      # Create a .env ONLY for the build using your Environment Variable
       - name: Create .env from GitHub Environment variables
         run: |
           echo "VITE_BASE_URL=${{ vars.VITE_BASE_URL }}" >> .env
@@ -37,7 +40,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      # 👇 SPA fallback so GitHub Pages serves index.html for client routes
+      # SPA fallback so client-side routes work on Pages
       - name: Add 404 fallback
         run: |
           cp dist/index.html dist/404.html || true
