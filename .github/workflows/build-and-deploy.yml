@@ -1,0 +1,62 @@
+name: Build & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    # We read vars from the 'production' Environment in repo Settings → Environments
+    environment: production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      # Create a .env ONLY for the build using your Environment Variable
+      - name: Create .env from GitHub Environment variables
+        run: |
+          echo "VITE_BASE_URL=${{ vars.VITE_BASE_URL }}" >> .env
+
+      - name: Build
+        run: npm run build
+
+      # 👇 SPA fallback so GitHub Pages serves index.html for client routes
+      - name: Add 404 fallback
+        run: |
+          cp dist/index.html dist/404.html || true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

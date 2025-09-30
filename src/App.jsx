@@ -1,14 +1,14 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Home from './pages/Home';
-import Game from './pages/Game';
-import './App.css';
+import Home from "./pages/Home.jsx";
+import Game from "./pages/Game.jsx";
+import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <div className="gmk">
-      {/* RUBRIK */}
+      {/* Header */}
       <section className="hero">
         <div className="title">
           <div className="latin">GOMOKU</div>
@@ -17,12 +17,12 @@ function App() {
         <div className="divider"></div>
       </section>
 
+      {/* Routes live here (single source of truth) */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game/:roomId" element={<Game />} />
+        {/* Use ONE param name consistently; pick :id */}
+        <Route path="/game/:id" element={<Game />} />
       </Routes>
     </div>
   );
 }
-
-export default App;
