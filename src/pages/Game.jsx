@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BoardWrapper from "../components/board/BoardWrapper";
+import Sidebar from "../components/Sidebar/Sidebar";
 import { socket, connect, on, off, joinRoom } from "../lib/socket";
 import {StatusBar} from '@gomoku/components';
 
@@ -82,54 +83,62 @@ export default function Game() {
   }));
   console.table(uiMoves);
   return (
-    <main style={{ padding: "1rem" }}>
-      <h1>Game Board</h1>
+    <>
+      {/* SIDOMENY */}
+      <Sidebar 
+        onStartGame={() => setMoves([])}
+        onRestart={onRestart}
+      />
       
-      {/* 🏆 Winner Banner */}
-      {gameWon && (
-        <div style={{
-          background: 'linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3))',
-          color: '#0b1020',
-          padding: '1.5rem',
-          margin: '1rem 0',
-          borderRadius: 'var(--r-lg)',
-          textAlign: 'center',
-          fontSize: '1.4rem',
-          fontWeight: '900',
-          letterSpacing: '0.05em',
-          boxShadow: '0 10px 24px color-mix(in oklab, var(--accent2), transparent 60%)',
-          border: '1px solid var(--glass-brd)'
-        }}>
-          🎉 {winner === socket.id ? 'DU VANN!' : 'MOTSTÅNDAREN VANN!'} 🎉
-        </div>
-      )}
-      
-      <div style={{ marginTop: "1rem" }}>
+      {/* BRÄDE */}
+      <section className="card board-card">
+        {/* 🏆 Winner Banner */}
+        {gameWon && (
+          <div style={{
+            background: 'linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3))',
+            color: '#0b1020',
+            padding: '1.5rem',
+            margin: '0 0 1rem 0',
+            borderRadius: 'var(--r-lg)',
+            textAlign: 'center',
+            fontSize: '1.4rem',
+            fontWeight: '900',
+            letterSpacing: '0.05em',
+            boxShadow: '0 10px 24px color-mix(in oklab, var(--accent2), transparent 60%)',
+            border: '1px solid var(--glass-brd)'
+          }}>
+            🎉 {winner === socket.id ? 'DU VANN!' : 'MOTSTÅNDAREN VANN!'} 🎉
+          </div>
+        )}
+        
         <BoardWrapper onCellClick={handleMyMove} gameWon={gameWon} />
-      </div>
 
-      {/* Status + Moves under the board */}
-      <section style={{ marginTop: "1rem" }}>
-        <StatusBar
-          currentPlayer={currentPlayer}
-          winner={winner}
-          moveCount={moveCount}
-          boardSize={boardSize}
-          onRestart={onRestart}
-          lastMove={lastMove}
-        />
+        {/* Status + Moves under the board */}
+        <section style={{ marginTop: "1rem", padding: "0 10px" }}>
+          <StatusBar
+            currentPlayer={currentPlayer}
+            winner={winner}
+            moveCount={moveCount}
+            boardSize={boardSize}
+            onRestart={onRestart}
+            lastMove={lastMove}
+          />
 
-        <ol style={{ paddingLeft: "1rem", lineHeight: 1.6 }}>
-          {" "}
-          {/*replace later with MoveList */}
-          {uiMoves.map((m) => (
-            <li key={m.id}>
-              {m.id}. {m.who} → {m.coord} • {m.time}
-            </li>
-          ))}
-          {uiMoves.length === 0 && <li>No moves yet</li>}
-        </ol>
+          <details style={{ marginTop: "1rem" }}>
+            <summary style={{ cursor: "pointer", color: "var(--muted)", fontSize: "12px", fontWeight: "800" }}>
+              Drag historik ({uiMoves.length})
+            </summary>
+            <ol style={{ paddingLeft: "1rem", lineHeight: 1.6, fontSize: "12px", color: "var(--muted)" }}>
+              {uiMoves.map((m) => (
+                <li key={m.id}>
+                  {m.id}. {m.who} → {m.coord} • {m.time}
+                </li>
+              ))}
+              {uiMoves.length === 0 && <li>Inga drag än</li>}
+            </ol>
+          </details>
+        </section>
       </section>
-    </main>
+    </>
   );
 }

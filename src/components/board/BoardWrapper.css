@@ -1,19 +1,4 @@
-/* ======= TEMA VARIABLER ======= */
-:root {
-  --bg1: #0b1020;
-  --bg2: #0f1530;
-  --ink: #e7e9f3;
-  --muted: #9aa1b7;
-  --glass: rgba(255, 255, 255, 0.06);
-  --glass-brd: rgba(255, 255, 255, 0.18);
-  --accent1: #2563eb;
-  --accent2: #0ea5e9;
-  --accent3: #4f46e5;
-  --last: #2563eb;
-  --wood: #e7d3a5;
-  --line: #7c6a3a;
-  --r-lg: 16px;
-}
+/* BoardWrapper uses global theme variables from theme.css */
 
 /* ======= BOARD WRAPPER ======= */
 .board-wrap {
