@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar/Sidebar";
+import {Sidebar} from "@gomoku/components";
 
 export default function Home() {
   const navigate = useNavigate();
