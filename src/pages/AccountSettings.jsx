@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteAccount, logout } from "../lib/api";
-import Sidebar from "../components/Sidebar/Sidebar";
 
 export default function AccountSettings() {
   const navigate = useNavigate();
@@ -46,12 +45,7 @@ export default function AccountSettings() {
   };
 
   return (
-    <>
-      {/* SIDOMENY */}
-      <Sidebar />
-      
-      {/* KONTOINSTÄLLNINGAR */}
-      <section className="card board-card">
+    <section className="card board-card" style={{ gridColumn: "1 / -1" }}>
       <div style={{ padding: "2rem" }}>
         <h1 style={{ 
           color: "var(--ink)", 
@@ -274,6 +268,5 @@ export default function AccountSettings() {
         </div>
       )}
     </section>
-    </>
   );
 }
