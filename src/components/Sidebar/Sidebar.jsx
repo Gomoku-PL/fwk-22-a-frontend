@@ -78,6 +78,9 @@ const Sidebar = ({ onGameModeChange, onDifficultyChange, onStartGame, onRestart,
         <button className="btn-ghost" onClick={handleHome}>
           <span className="txt">Hem</span>
         </button>
+        <button className="btn-ghost" onClick={() => navigate('/account-settings')}>
+          <span className="txt">⚙️ Inställningar</span>
+        </button>
       </div>
     </aside>
   );

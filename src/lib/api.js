@@ -61,3 +61,37 @@ export function getSavedGameId() {
 export function clearSavedGameId() {
   localStorage.removeItem("currentGameId");
 }
+
+export async function deleteAccount() {
+  try {
+    const response = await fetch(`${VITE_BASE_URL.replace('/games', '')}/account`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include" // Include cookies for authentication
+    });
+    
+    if (response.ok) {
+      // Clear all local storage data
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      return { success: true };
+    } else {
+      const errorData = await response.json();
+      throw { status: response.status, ...errorData };
+    }
+  } catch (err) {
+    console.error("deleteAccount error:", err);
+    throw err;
+  }
+}
+
+export function logout() {
+  // Clear all session data
+  localStorage.clear();
+  sessionStorage.clear();
+  
+  // If using cookies, you might want to call a logout endpoint
+  // For now, just clear local data
+  return Promise.resolve();
+}
