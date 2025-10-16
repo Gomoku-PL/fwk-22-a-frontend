@@ -18,7 +18,7 @@ const SecurityNotice = ({ https = true, encryption = true, auth = true, docsLink
                 </span>
             </div>
             <a href={docsLink} target="_blank" rel="noopener noreferrer">
-                Learn more
+
             </a>
         </div>
     );
