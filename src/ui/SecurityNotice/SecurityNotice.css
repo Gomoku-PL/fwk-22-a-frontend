@@ -1,0 +1,40 @@
+.security-notice {
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    max-width: 300px;
+    font-family: sans-serif;
+}
+
+.badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: default;
+}
+
+.badge.secure {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge.insecure {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+a {
+    font-size: 0.8rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
