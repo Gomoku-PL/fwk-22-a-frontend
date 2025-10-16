@@ -1,12 +1,48 @@
-# React + Vite
+# fwk-22-a-frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Vite frontend for Gomoku-PL. Connects to backend for game logic, user data, and GDPR features. Includes Storybook for UI components.
 
-Currently, two official plugins are available:
+## Features
+- Play Gomoku with real-time multiplayer
+- Board, Sidebar, StatusBar, AccountSettings, Home pages
+- Error feedback, restart, undo, bot mode
+- GDPR support: data access, portability, consent, retention, deletion
+- Storybook stories for all major components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup
+1. Install dependencies:
+	```sh
+	npm install
+	```
+2. Start development server:
+	```sh
+	npm run dev
+	```
+3. Start Storybook:
+	```sh
+	npm run storybook
+	```
 
-## Expanding the ESLint configuration
+## Usage
+- Main app: `src/App.jsx`, `src/pages/`
+- Components: from `@gomoku/components` or local `src/components/`
+- See Storybook for usage examples and props
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Scripts
+- `npm run format:repo` — Format all code/config files with Prettier
+- `npm run strip:comments` — Remove comments from all source files
+- `npm run lint` — Run ESLint
+- `npm run build` — Build for production
+- `npm run preview` — Preview production build
+
+## GDPR Features
+- Data access, portability, consent, retention, deletion UI
+- Integrates with backend GDPR endpoints
+
+## Development
+- Source: `src/`
+- Stories: `.storybook/`, `public/stories/`
+- Scripts: `scripts/`
+
+## License
+ISC

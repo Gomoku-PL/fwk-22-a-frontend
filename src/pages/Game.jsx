@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import {Sidebar, StatusBar, BoardWrapper} from "@gomoku/components";
+import { Sidebar, StatusBar, BoardWrapper } from "@gomoku/components";
 import { socket, connect, on, off, joinRoom } from "../lib/socket";
 
 import engine from "../lib/engine";
