@@ -3,11 +3,11 @@ import { create } from "zustand";
 import { createGame, getGame, postMove } from "../lib/api";
 
 export const useGameStore = create((set, get) => ({
-  board: [],            // 2D array of "B", "W", or null
-  currentPlayer: "B",   // "B" or "W"
-  gameId: null,         // Current game ID
-  status: "ongoing",    // "ongoing", "won", "draw"
-  winner: null,         // "B", "W", or null
+  board: [], // 2D array of "B", "W", or null
+  currentPlayer: "B", // "B" or "W"
+  gameId: null, // Current game ID
+  status: "ongoing", // "ongoing", "won", "draw"
+  winner: null, // "B", "W", or null
 
   // Initialize/reset the game
   reset: async (options = {}) => {

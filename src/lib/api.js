@@ -25,10 +25,13 @@ export async function createGame(options = {}) {
 }
 
 export async function getGame(gameId) {
-  if (!gameId) throw { status: 400, error: "MISSING_ID", message: "Game ID is required" };
+  if (!gameId)
+    throw { status: 400, error: "MISSING_ID", message: "Game ID is required" };
 
   try {
-    const response = await fetch(`${VITE_BASE_URL}/${encodeURIComponent(gameId)}`);
+    const response = await fetch(
+      `${VITE_BASE_URL}/${encodeURIComponent(gameId)}`,
+    );
     return await handleResponse(response);
   } catch (err) {
     console.error("getGame error:", err);
@@ -37,16 +40,24 @@ export async function getGame(gameId) {
 }
 
 export async function postMove(gameId, { x, y }) {
-  if (!gameId) throw { status: 400, error: "MISSING_ID", message: "Game ID is required" };
+  if (!gameId)
+    throw { status: 400, error: "MISSING_ID", message: "Game ID is required" };
   if (!Number.isInteger(x) || !Number.isInteger(y))
-    throw { status: 400, error: "INVALID_COORDS", message: "x and y must be integers" };
+    throw {
+      status: 400,
+      error: "INVALID_COORDS",
+      message: "x and y must be integers",
+    };
 
   try {
-    const response = await fetch(`${VITE_BASE_URL}/${encodeURIComponent(gameId)}/moves`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ x, y }),
-    });
+    const response = await fetch(
+      `${VITE_BASE_URL}/${encodeURIComponent(gameId)}/moves`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ x, y }),
+      },
+    );
     return await handleResponse(response);
   } catch (err) {
     console.error("postMove error:", err);
@@ -64,17 +75,20 @@ export function clearSavedGameId() {
 
 export async function deleteAccount() {
   try {
-    const response = await fetch(`${VITE_BASE_URL.replace('/games', '')}/account`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include" // Include cookies for authentication
-    });
-    
+    const response = await fetch(
+      `${VITE_BASE_URL.replace("/games", "")}/account`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Include cookies for authentication
+      },
+    );
+
     if (response.ok) {
       // Clear all local storage data
       localStorage.clear();
       sessionStorage.clear();
-      
+
       return { success: true };
     } else {
       const errorData = await response.json();
@@ -90,7 +104,7 @@ export function logout() {
   // Clear all session data
   localStorage.clear();
   sessionStorage.clear();
-  
+
   // If using cookies, you might want to call a logout endpoint
   // For now, just clear local data
   return Promise.resolve();
