@@ -9,6 +9,10 @@ export default function Home() {
     navigate("/game/room1");
   };
 
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
   return (
     <>
       {/* SIDOMENY */}
@@ -67,6 +71,14 @@ export default function Home() {
                 style={{ width: "100%" }}
               >
                 🎮 Starta nytt spel
+              </button>
+
+              <button
+                className="btn-secondary"
+                onClick={handleRegister}
+                style={{ width: "100%" }}
+              >
+                👤 Skapa konto
               </button>
 
               <div
