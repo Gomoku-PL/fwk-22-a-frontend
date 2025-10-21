@@ -3,9 +3,9 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
 import Game from "./pages/Game.jsx";
-
 import AccountSettings from "./pages/AccountSettings.jsx";
 import SecurityNotice from "../src/ui/SecurityNotice/SecurityNotice.jsx";
+import CookieBanner from "./components/CookieBanner.jsx";
 import "./App.css";
 
 export default function App() {
@@ -34,6 +34,8 @@ export default function App() {
         autth={true}
         docsLink="./security"
       />
+
+      <CookieBanner />
     </div>
   );
 }

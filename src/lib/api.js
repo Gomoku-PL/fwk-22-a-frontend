@@ -109,3 +109,32 @@ export function logout() {
   // For now, just clear local data
   return Promise.resolve();
 }
+
+export async function saveCookiePreferences(preferences) {
+  try {
+    const response = await fetch('/cookies/prefs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(preferences),
+      credentials: 'include'
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw { status: response.status, message: 'Failed to save preferences' };
+    }
+  } catch (err) {
+    console.warn('Cookie preferences sync failed:', err);
+    throw err;
+  }
+}
+
+export function getCookiePreferences() {
+  const savedPrefs = localStorage.getItem('app.cookiePrefs');
+  return savedPrefs ? JSON.parse(savedPrefs) : null;
+}
+
+export function setCookiePreferences(preferences) {
+  localStorage.setItem('app.cookiePrefs', JSON.stringify(preferences));
+}
