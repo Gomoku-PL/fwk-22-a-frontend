@@ -87,13 +87,7 @@ export default function Register() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "var(--bg1)",
-        padding: "2rem",
-      }}
-    >
+   
       <div
         style={{
           display: "grid",
@@ -133,7 +127,7 @@ export default function Register() {
           style={{
             gridColumn: "2",
             position: "relative",
-            left: "162px" /* 👈 ADJUST THIS: negative = left, positive = right */,
+            left: "195px" /* 👈 ADJUST THIS: negative = left, positive = right */,
             top: "0px" /* 👈 ADJUST THIS: negative = up, positive = down */,
           }}
         >
@@ -149,6 +143,6 @@ export default function Register() {
         {/* Empty right column */}
         <div></div>
       </div>
-    </div>
+
   );
 }
