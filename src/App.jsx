@@ -1,14 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
 import Game from "./pages/Game.jsx";
 import AccountSettings from "./pages/AccountSettings.jsx";
 import SecurityNotice from "../src/ui/SecurityNotice/SecurityNotice.jsx";
-import CookieBanner from "./components/CookieBanner.jsx";
+import { CookieBanner } from "@gomoku/components";
+import { getCookiePreferences, setCookiePreferences, saveCookiePreferences } from "./lib/api.js";
 import "./App.css";
 
 export default function App() {
+  const [cookiePreferences, setCookiePrefs] = useState(null);
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
+
+  useEffect(() => {
+    const savedPrefs = getCookiePreferences();
+    if (savedPrefs) {
+      setCookiePrefs(savedPrefs);
+      setShowCookieBanner(false);
+    } else {
+      setShowCookieBanner(true);
+    }
+  }, []);
+
+  const handleCookieSave = async (preferences) => {
+    const formattedPrefs = {
+      essential: preferences.necessary,
+      analytics: preferences.analytics,
+      marketing: preferences.marketing
+    };
+    
+    setCookiePreferences(formattedPrefs);
+    setCookiePrefs(formattedPrefs);
+    setShowCookieBanner(false);
+
+    try {
+      await saveCookiePreferences(formattedPrefs);
+    } catch (error) {
+      console.warn('Failed to sync cookie preferences to backend:', error);
+    }
+  };
+
+  const handleCookieDismiss = () => {
+    setShowCookieBanner(false);
+  };
+
   return (
     <div className="gmk">
       {/* Header */}
@@ -35,7 +71,15 @@ export default function App() {
         docsLink="./security"
       />
 
-      <CookieBanner />
+      <CookieBanner 
+        isVisible={showCookieBanner}
+        initialPreferences={{
+          analytics: cookiePreferences?.analytics || false,
+          marketing: cookiePreferences?.marketing || false
+        }}
+        onSave={handleCookieSave}
+        onDismiss={handleCookieDismiss}
+      />
     </div>
   );
 }
