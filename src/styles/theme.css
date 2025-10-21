@@ -10,29 +10,39 @@
   --glass: rgba(255, 255, 255, 0.06);
   --glass-brd: rgba(255, 255, 255, 0.18);
 
-  --accent1: #2563eb; /* blå */
-  --accent2: #0ea5e9; /* cyan */
-  --accent3: #4f46e5; /* indigo */
-  --last: #2563eb; /* markering senaste drag */
+  --accent1: #2563eb;
+  /* blå */
+  --accent2: #0ea5e9;
+  /* cyan */
+  --accent3: #4f46e5;
+  /* indigo */
+  --last: #2563eb;
+  /* markering senaste drag */
 
   --wood: #e7d3a5;
   --line: #7c6a3a;
 
   --fs-title: clamp(26px, 5vw, 48px);
   --fs-jp: clamp(22px, 4.4vw, 42px);
-  --fs-body: 14px; /* bastext */
-  --fs-ui: 13px; /* UI/knappar */
-  --r-lg: 16px; /* stora hörn */
-  --r-btn: 20px; /* knappar */
+  --fs-body: 14px;
+  /* bastext */
+  --fs-ui: 13px;
+  /* UI/knappar */
+  --r-lg: 16px;
+  /* stora hörn */
+  --r-btn: 20px;
+  /* knappar */
 }
 
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   color: var(--ink);
@@ -46,16 +56,12 @@ body {
     Arial,
     sans-serif;
   background:
-    radial-gradient(
-      900px 540px at 10% -10%,
+    radial-gradient(900px 540px at 10% -10%,
       rgba(79, 70, 229, 0.12) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      820px 480px at 110% 0%,
+      transparent 60%),
+    radial-gradient(820px 480px at 110% 0%,
       rgba(37, 99, 235, 0.1) 0%,
-      transparent 60%
-    ),
+      transparent 60%),
     linear-gradient(180deg, var(--bg1), var(--bg2));
 }
 
@@ -66,9 +72,11 @@ body {
   padding: 0 14px;
   display: grid;
   gap: 14px;
-  grid-template-columns: 300px 1fr; /* avlång meny + bräde */
+  grid-template-columns: 300px 1fr;
+  /* avlång meny + bräde */
   align-items: start;
 }
+
 @media (max-width: 900px) {
   .gmk {
     grid-template-columns: 1fr;
@@ -89,6 +97,7 @@ body {
   flex-wrap: wrap;
   margin: 0;
 }
+
 .title .latin {
   font-size: var(--fs-title);
   font-weight: 900;
@@ -99,6 +108,7 @@ body {
   background-clip: text;
   color: transparent;
 }
+
 .title .jp {
   font-family: "Noto Serif JP", serif;
   font-size: var(--fs-jp);
@@ -109,21 +119,18 @@ body {
   background-clip: text;
   color: transparent;
 }
+
 .hero .divider {
   width: min(92vw, 680px);
   height: 2px;
   margin: 8px auto 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--accent1),
-    var(--accent2),
-    var(--accent3),
-    transparent
-  );
-  filter: drop-shadow(
-    0 0 4px color-mix(in oklab, var(--accent2), transparent 65%)
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--accent1),
+      var(--accent2),
+      var(--accent3),
+      transparent);
+  filter: drop-shadow(0 0 4px color-mix(in oklab, var(--accent2), transparent 65%));
   border-radius: 2px;
 }
 
@@ -135,22 +142,22 @@ body {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
 }
+
 .soft-border {
   position: relative;
   border-radius: var(--r-lg);
 }
+
 .soft-border::before {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--accent1), transparent 35%),
-    color-mix(in oklab, var(--accent2), transparent 35%),
-    color-mix(in oklab, var(--accent3), transparent 35%)
-  );
+  background: linear-gradient(90deg,
+      color-mix(in oklab, var(--accent1), transparent 35%),
+      color-mix(in oklab, var(--accent2), transparent 35%),
+      color-mix(in oklab, var(--accent3), transparent 35%));
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -163,6 +170,7 @@ body {
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
+
 .soft-border:hover::before {
   opacity: 0.5;
 }
@@ -175,6 +183,7 @@ body {
   padding: 12px;
   border-radius: var(--r-lg);
 }
+
 .group {
   display: flex;
   flex-direction: column;
@@ -189,6 +198,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-brd);
 }
+
 .seg-btn {
   padding: 8px 12px;
   border-radius: var(--r-btn);
@@ -201,16 +211,16 @@ body {
   cursor: pointer;
   transition: 0.18s ease;
 }
+
 .seg-btn:hover {
   filter: brightness(1.07);
 }
+
 .seg-btn.active {
-  background: linear-gradient(
-    90deg,
-    var(--accent1),
-    var(--accent2),
-    var(--accent3)
-  );
+  background: linear-gradient(90deg,
+      var(--accent1),
+      var(--accent2),
+      var(--accent3));
   color: #0b1020;
   box-shadow: 0 8px 20px color-mix(in oklab, var(--accent1), transparent 62%);
 }
@@ -221,6 +231,7 @@ body {
   font-weight: 800;
   letter-spacing: 0.06em;
 }
+
 .select {
   display: flex;
   align-items: center;
@@ -233,6 +244,7 @@ body {
   font-weight: 800;
   font-size: var(--fs-ui);
 }
+
 .select select {
   appearance: none;
   border: none;
@@ -261,32 +273,31 @@ body {
   color: #0b1020;
   cursor: pointer;
   overflow: hidden;
-  background: linear-gradient(
-    90deg,
-    var(--accent1),
-    var(--accent2),
-    var(--accent3)
-  );
+  background: linear-gradient(90deg,
+      var(--accent1),
+      var(--accent2),
+      var(--accent3));
   box-shadow: 0 10px 24px color-mix(in oklab, var(--accent2), transparent 60%);
   transition: transform 0.12s ease;
 }
+
 .btn:active {
   transform: translateY(1px);
 }
+
 .btn::after {
   content: "";
   position: absolute;
   inset: -2px;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.5),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent);
   transform: translateX(-120%);
   filter: blur(2px);
   opacity: 0.65;
 }
+
 .btn:hover::after {
   transform: translateX(120%);
   transition: transform 0.7s ease;
@@ -300,7 +311,19 @@ body {
   border-radius: var(--r-btn);
   padding: 11px 14px;
   font-size: var(--fs-ui);
+  transition: all 0.2s ease;
 }
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-ghost:active {
+  transform: translateY(0);
+}
+
 .btn-ghost .txt {
   background: linear-gradient(90deg, var(--accent1), var(--accent3));
   -webkit-background-clip: text;
@@ -321,10 +344,12 @@ body {
   gap: 8px;
   align-items: center;
 }
+
 .board-card {
   padding: 10px;
   border-radius: var(--r-lg);
 }
+
 .board {
   /* Lagom storlek på vanliga skärmar utan skroll: >= ~440px, <= 680px, följer höjden */
   width: min(100%, clamp(440px, 70vh, 680px));
@@ -338,19 +363,19 @@ body {
     0 8px 26px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 }
+
 .board::after {
   content: "";
   position: absolute;
   inset: -22%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0 75%,
-    rgba(255, 255, 255, 0.14) 80%,
-    transparent 90% 100%
-  );
+  background: conic-gradient(from 0deg,
+      transparent 0 75%,
+      rgba(255, 255, 255, 0.14) 80%,
+      transparent 90% 100%);
   animation: slowspin 14s linear infinite;
   pointer-events: none;
 }
+
 @keyframes slowspin {
   to {
     transform: rotate(360deg);
@@ -370,18 +395,15 @@ body {
   position: absolute;
   inset: 6% 6%;
   background-image:
-    repeating-linear-gradient(
-      to right,
+    repeating-linear-gradient(to right,
       var(--line) 0 1px,
-      transparent 1px calc(100% / 15)
-    ),
-    repeating-linear-gradient(
-      to bottom,
+      transparent 1px calc(100% / 15)),
+    repeating-linear-gradient(to bottom,
       var(--line) 0 1px,
-      transparent 1px calc(100% / 15)
-    );
+      transparent 1px calc(100% / 15));
   opacity: 0.58;
 }
+
 .coords {
   position: absolute;
   inset: 6% 6%;
@@ -391,6 +413,7 @@ body {
   font-size: 10px;
   opacity: 0.6;
 }
+
 .coords.top {
   display: grid;
   grid-template-columns: repeat(15, 1fr);
@@ -398,6 +421,7 @@ body {
   left: 6%;
   right: 6%;
 }
+
 .coords.left {
   display: grid;
   grid-template-rows: repeat(15, 1fr);
@@ -405,6 +429,7 @@ body {
   top: 6%;
   bottom: 6%;
 }
+
 .coords.top span,
 .coords.left span {
   place-self: center;
@@ -417,6 +442,7 @@ body {
   grid-template-columns: repeat(15, 1fr);
   grid-template-rows: repeat(15, 1fr);
 }
+
 .stone {
   width: 70%;
   height: 70%;
@@ -424,13 +450,16 @@ body {
   place-self: center;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.26);
 }
+
 .black {
   background: #141414;
 }
+
 .white {
   background: #f6f6f6;
   border: 1px solid #a3a3a3;
 }
+
 .last {
   outline: 2px solid var(--last);
   outline-offset: 3px;

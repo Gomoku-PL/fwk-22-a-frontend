@@ -74,11 +74,11 @@ export default function Home() {
               </button>
 
               <button
-                className="btn-secondary"
+                className="btn-ghost"
                 onClick={handleRegister}
                 style={{ width: "100%" }}
               >
-                👤 Skapa konto
+                <span className="txt">👤 Skapa konto</span>
               </button>
 
               <div

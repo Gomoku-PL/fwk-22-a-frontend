@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { RegisterForm } from '@gomoku/components';
-import { registerUser } from '../lib/api.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { RegisterForm } from "@gomoku/components";
+import { registerUser } from "../lib/api.js";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -18,71 +18,137 @@ export default function Register() {
         email: formData.email,
         password: formData.password,
         consent: formData.consent,
-        timestamp: formData.timestamp
+        timestamp: formData.timestamp,
       });
-      
+
       setSuccess(true);
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 2000);
-      
     } catch (err) {
-      setError(err.message || 'Registration failed. Please try again.');
+      setError(err.message || "Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleCancel = () => {
-    navigate('/');
+    navigate("/");
   };
 
   if (success) {
     return (
-      <div style={{ 
-        textAlign: 'center', 
-        padding: '2rem',
-        maxWidth: '500px',
-        margin: '2rem auto'
-      }}>
-        <h2 style={{ color: '#28a745', marginBottom: '1rem' }}>
-          Registration Successful!
-        </h2>
-        <p style={{ marginBottom: '1rem' }}>
-          Your account has been created successfully.
-        </p>
-        <p style={{ color: '#6c757d' }}>
-          Redirecting to home page...
-        </p>
+      <div className="gmk">
+        <section className="hero">
+          <div
+            className="card"
+            style={{
+              textAlign: "center",
+              maxWidth: "500px",
+              margin: "0 auto",
+              padding: "2rem",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "var(--fs-title)",
+                fontWeight: 900,
+                background:
+                  "linear-gradient(90deg, var(--accent1), var(--accent2))",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                marginBottom: "1rem",
+              }}
+            >
+              Registration Successful!
+            </h2>
+            <p
+              style={{
+                color: "var(--ink)",
+                marginBottom: "1rem",
+                fontSize: "var(--fs-body)",
+              }}
+            >
+              Your account has been created successfully.
+            </p>
+            <p
+              style={{
+                color: "var(--muted)",
+                fontSize: "var(--fs-ui)",
+              }}
+            >
+              Redirecting to home page...
+            </p>
+          </div>
+        </section>
       </div>
     );
   }
 
   return (
-    <div style={{ 
-      maxWidth: '600px', 
-      margin: '2rem auto', 
-      padding: '0 1rem'
-    }}>
-      {error && (
-        <div style={{
-          backgroundColor: '#f8d7da',
-          color: '#721c24',
-          border: '1px solid #f5c6cb',
-          borderRadius: '4px',
-          padding: '1rem',
-          marginBottom: '1rem'
-        }}>
-          <strong>Error:</strong> {error}
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "var(--bg1)",
+        padding: "2rem",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 700px 1fr",
+          gridTemplateRows: "auto auto",
+          gap: "2rem",
+          minHeight: "calc(100vh - 4rem)",
+        }}
+      >
+        {/* Empty left column */}
+        <div></div>
+
+        {/* Error message in center column */}
+        {error && (
+          <div
+            style={{
+              padding: "1rem",
+              backgroundColor: "rgba(239, 68, 68, 0.1)",
+              color: "var(--ink)",
+              border: "1px solid rgba(239, 68, 68, 0.3)",
+              borderRadius: "8px",
+              gridColumn: "1 / span 3",
+            }}
+          >
+            <strong>Error:</strong> {error}
+          </div>
+        )}
+
+        {/* Empty right column */}
+        <div></div>
+
+        {/* Empty left column */}
+        <div></div>
+
+        {/* RegisterForm in center column */}
+        <div
+          style={{
+            gridColumn: "2",
+            position: "relative",
+            left: "162px" /* 👈 ADJUST THIS: negative = left, positive = right */,
+            top: "0px" /* 👈 ADJUST THIS: negative = up, positive = down */,
+          }}
+        >
+          <RegisterForm
+            onSubmit={handleSubmit}
+            onCancel={handleCancel}
+            disabled={isLoading}
+            showValidation={true}
+            isModal={false}
+          />
         </div>
-      )}
-      
-      <RegisterForm
-        onSubmit={handleSubmit}
-        onCancel={handleCancel}
-        disabled={isLoading}
-        showValidation={true}
-      />
+
+        {/* Empty right column */}
+        <div></div>
+      </div>
     </div>
   );
 }
