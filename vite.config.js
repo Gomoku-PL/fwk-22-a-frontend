@@ -3,17 +3,29 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import process from "node:process";
+import fs from "node:fs";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const sslKey = process.env.VITE_DEV_SSL_KEY;
-const sslCert = process.env.VITE_DEV_SSL_CERT;
+const sslKeyPath = process.env.VITE_DEV_SSL_KEY;
+const sslCertPath = process.env.VITE_DEV_SSL_CERT;
+let httpsOptions = false;
+if (sslKeyPath && sslCertPath) {
+  try {
+    httpsOptions = {
+      key: fs.readFileSync(sslKeyPath),
+      cert: fs.readFileSync(sslCertPath),
+    };
+  } catch (e) {
+    console.warn("[vite] Unable to read SSL key/cert:", e.message);
+  }
+}
 
 export default defineConfig({
   plugins: [react()],
   server: {
-    https: sslKey && sslCert ? { key: sslKey, cert: sslCert } : false,
+    https: httpsOptions,
     proxy: {
       "/api": {
         target: "https://fwk-22-a-backend.onrender.com", // <<<REPLACE_THIS>>> (origin only)
