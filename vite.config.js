@@ -2,16 +2,18 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import process from "node:process";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 
-const dirname =
-  typeof __dirname !== "undefined"
-    ? __dirname
-    : path.dirname(fileURLToPath(import.meta.url));
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const sslKey = process.env.VITE_DEV_SSL_KEY;
+const sslCert = process.env.VITE_DEV_SSL_CERT;
 
 export default defineConfig({
   plugins: [react()],
   server: {
+    https: sslKey && sslCert ? { key: sslKey, cert: sslCert } : false,
     proxy: {
       "/api": {
         target: "https://fwk-22-a-backend.onrender.com", // <<<REPLACE_THIS>>> (origin only)

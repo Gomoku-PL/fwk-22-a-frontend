@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:https": "cross-env VITE_DEV_SSL_KEY=../dev-setup/certs/localhost-key.pem VITE_DEV_SSL_CERT=../dev-setup/certs/localhost.pem vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "strip:comments": "node ./scripts/removeComments.mjs",
-    "format:repo": "node ./scripts/formatRepo.mjs" 
+    "format:repo": "node ./scripts/formatRepo.mjs"
   },
   "dependencies": {
     "@gomoku/components": "^1.0.10",
@@ -29,6 +30,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@chromatic-com/storybook": "^4.1.1",
     "@eslint/js": "^9.33.0",
     "@storybook/addon-a11y": "9.1.5",

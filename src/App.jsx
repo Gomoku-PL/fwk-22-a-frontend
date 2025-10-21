@@ -20,7 +20,6 @@ export default function App() {
         <div className="divider"></div>
       </section>
 
-
       {/* Routes live here (single source of truth) */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,12 +28,12 @@ export default function App() {
         <Route path="/account-settings" element={<AccountSettings />} />
       </Routes>
 
-
       <SecurityNotice
         https={window.location.protocol === "https:"}
         encryption={true}
         autth={true}
-        docsLink="./security" />
+        docsLink="./security"
+      />
     </div>
   );
 }
