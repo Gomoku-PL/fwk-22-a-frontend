@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Game from "./pages/Game.jsx";
 import AccountSettings from "./pages/AccountSettings.jsx";
+import Register from "./pages/Register.jsx";
 import SecurityNotice from "../src/ui/SecurityNotice/SecurityNotice.jsx";
 import { CookieBanner } from "@gomoku/components";
 import { getCookiePreferences, setCookiePreferences, saveCookiePreferences } from "./lib/api.js";
@@ -62,6 +63,7 @@ export default function App() {
         {/* Use ONE param name consistently; pick :id */}
         <Route path="/game/:id" element={<Game />} />
         <Route path="/account-settings" element={<AccountSettings />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
       <SecurityNotice

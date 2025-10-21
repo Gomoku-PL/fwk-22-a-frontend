@@ -179,3 +179,28 @@ export function trackPageView(page) {
 
   console.log('Page view tracked:', page);
 }
+
+export async function registerUser(userData) {
+  try {
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(userData),
+      credentials: 'include'
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || data.error || 'Registration failed');
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Registration error:', err);
+    throw err;
+  }
+}
