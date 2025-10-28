@@ -76,7 +76,7 @@ export function clearSavedGameId() {
 export async function deleteAccount() {
   try {
     const response = await fetch(
-      `${VITE_BASE_URL.replace("/games", "")}/account`,
+      `${VITE_BASE_URL.replace("/games", "")}/data`,
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -184,7 +184,7 @@ export async function registerUser(userData) {
   try {
     const response = await fetch('/api/auth/register', {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -193,7 +193,7 @@ export async function registerUser(userData) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       throw new Error(data.message || data.error || 'Registration failed');
     }
