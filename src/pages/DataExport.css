@@ -1,0 +1,115 @@
+/* Container card */
+.data-export-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+/* Header */
+.data-export-container h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+/* Label */
+.data-export-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Select input */
+.data-export-container select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s border-color;
+}
+
+.data-export-container select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Button */
+.data-export-container button {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s background-color, 0.2s opacity;
+}
+
+.data-export-container button:hover {
+  background-color: #2563eb;
+}
+
+.data-export-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Progress bar */
+.progress-bar-container {
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  height: 0.625rem;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #3b82f6;
+  border-radius: 0.5rem;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Progress text */
+.progress-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Success message */
+.success-msg {
+  color: #16a34a;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* Error message */
+.error-msg {
+  color: #dc2626;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.error-msg button {
+  text-decoration: underline;
+  background: none;
+  color: #3b82f6;
+  margin-left: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
