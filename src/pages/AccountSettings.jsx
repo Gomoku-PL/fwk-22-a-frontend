@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteAccount, logout } from "../lib/api";
+import { PrivacyNotice } from "@gomoku/components";
 
 export default function AccountSettings() {
   const navigate = useNavigate();
@@ -71,6 +72,20 @@ export default function AccountSettings() {
           <p style={{ color: "var(--muted)", fontSize: "var(--fs-body)" }}>
             Hantera ditt konto och dina data.
           </p>
+        </div>
+
+        {/* Privacy Notice for Settings */}
+        <div style={{ marginBottom: "2rem" }}>
+          <PrivacyNotice
+            variant="settings"
+            theme="light"
+            onPolicyClick={() => {
+              window.open("/privacy-policy", "_blank", "noopener,noreferrer");
+            }}
+            onSettingsClick={() => {
+              window.open("/privacy-settings", "_blank", "noopener,noreferrer");
+            }}
+          />
         </div>
 
         {/* Danger Zone */}

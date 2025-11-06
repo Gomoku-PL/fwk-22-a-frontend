@@ -7,6 +7,7 @@ import AccountSettings from "./pages/AccountSettings.jsx";
 import Register from "./pages/Register.jsx";
 import SecurityNotice from "../src/ui/SecurityNotice/SecurityNotice.jsx";
 import { CookieBanner } from "@gomoku/components";
+import { PrivacyNotice } from "@gomoku/components";
 import { getCookiePreferences, setCookiePreferences, saveCookiePreferences } from "./lib/api.js";
 import "./App.css";
 
@@ -73,15 +74,16 @@ export default function App() {
         docsLink="./security"
       />
 
-      <CookieBanner 
+      <CookieBanner
         isVisible={showCookieBanner}
         initialPreferences={{
           analytics: cookiePreferences?.analytics || false,
-          marketing: cookiePreferences?.marketing || false
+          marketing: cookiePreferences?.marketing || false,
         }}
         onSave={handleCookieSave}
         onDismiss={handleCookieDismiss}
       />
+      <PrivacyNotice variant="footer" theme="dark" />
     </div>
   );
 }
