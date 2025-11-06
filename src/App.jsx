@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import Game from "./pages/Game.jsx";
 import AccountSettings from "./pages/AccountSettings.jsx";
 import Register from "./pages/Register.jsx";
+import DeleteData from "./pages/DeleteData.jsx";
 import SecurityNotice from "../src/ui/SecurityNotice/SecurityNotice.jsx";
 import { CookieBanner } from "@gomoku/components";
 import { PrivacyNotice } from "@gomoku/components";
@@ -31,7 +32,7 @@ export default function App() {
       analytics: preferences.analytics,
       marketing: preferences.marketing
     };
-    
+
     setCookiePreferences(formattedPrefs);
     setCookiePrefs(formattedPrefs);
     setShowCookieBanner(false);
@@ -65,6 +66,8 @@ export default function App() {
         <Route path="/game/:id" element={<Game />} />
         <Route path="/account-settings" element={<AccountSettings />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/deletedata" element={<DeleteData />} />
+
       </Routes>
 
       <SecurityNotice

@@ -76,7 +76,7 @@ export function clearSavedGameId() {
 export async function deleteAccount() {
   try {
     const response = await fetch(
-      `${VITE_BASE_URL.replace("/games", "")}/account`,
+      `${VITE_BASE_URL.replace("/games", "")}/data`,
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -91,7 +91,21 @@ export async function deleteAccount() {
 
       return { success: true };
     } else {
-      const errorData = await response.json();
+      // Check content-type before parsing JSON
+      const contentType = response.headers.get("content-type");
+      let errorData = { message: `HTTP ${response.status}` };
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          errorData = await response.json();
+        } catch (parseErr) {
+          console.warn("Failed to parse error JSON:", parseErr);
+        }
+      } else {
+        // Server returned HTML or other non-JSON (likely 404 page)
+        const text = await response.text();
+        errorData.message = `Server error: ${response.status} ${response.statusText}`;
+        console.error("Non-JSON response:", text.substring(0, 200));
+      }
       throw { status: response.status, ...errorData };
     }
   } catch (err) {
@@ -184,7 +198,7 @@ export async function registerUser(userData) {
   try {
     const response = await fetch('/api/auth/register', {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -193,7 +207,7 @@ export async function registerUser(userData) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       throw new Error(data.message || data.error || 'Registration failed');
     }

@@ -28,9 +28,9 @@ export default defineConfig({
     https: httpsOptions,
     proxy: {
       "/api": {
-        target: "https://fwk-22-a-backend.onrender.com", // <<<REPLACE_THIS>>> (origin only)
+        target: process.env.VITE_BACKEND_URL || "http://localhost:4000", // local dev backend
         changeOrigin: true,
-        // secure: false, // uncomment if you hit local TLS issues
+        secure: false, // allow self-signed certs in dev
       },
     },
   },
