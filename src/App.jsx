@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
 import Game from "./pages/Game.jsx";
 import AccountSettings from "./pages/AccountSettings.jsx";
 import Register from "./pages/Register.jsx";
+import Login from "./pages/Login.jsx";
 import DeleteData from "./pages/DeleteData.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import PrivacySettings from "./pages/PrivacySettings.jsx";
+import Profile from "./pages/Profile.jsx";
 import SecurityNotice from "../src/ui/SecurityNotice/SecurityNotice.jsx";
 import { CookieBanner } from "@gomoku/components";
 import { PrivacyNotice } from "@gomoku/components";
@@ -15,6 +20,7 @@ import "./App.css";
 export default function App() {
   const [cookiePreferences, setCookiePrefs] = useState(null);
   const [showCookieBanner, setShowCookieBanner] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedPrefs = getCookiePreferences();
@@ -48,6 +54,8 @@ export default function App() {
     setShowCookieBanner(false);
   };
 
+  // ...existing code...
+
   return (
     <div className="gmk">
       {/* Header */}
@@ -64,10 +72,13 @@ export default function App() {
         <Route path="/" element={<Home />} />
         {/* Use ONE param name consistently; pick :id */}
         <Route path="/game/:id" element={<Game />} />
-        <Route path="/account-settings" element={<AccountSettings />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
         <Route path="/deletedata" element={<DeleteData />} />
-
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/privacy-settings" element={<PrivacySettings />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       <SecurityNotice
@@ -86,7 +97,12 @@ export default function App() {
         onSave={handleCookieSave}
         onDismiss={handleCookieDismiss}
       />
-      <PrivacyNotice variant="footer" theme="dark" />
+      <PrivacyNotice
+        variant="footer"
+        theme="dark"
+        onPolicyClick={() => navigate("/privacy-policy")}
+        onSettingsClick={() => navigate("/privacy-settings")}
+      />
     </div>
   );
 }

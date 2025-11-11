@@ -75,11 +75,17 @@ export function clearSavedGameId() {
 
 export async function deleteAccount() {
   try {
+    // Get CSRF token from localStorage if available
+    const csrfToken = localStorage.getItem("csrfToken");
+    const headers = { "Content-Type": "application/json" };
+    if (csrfToken) {
+      headers["X-CSRF-Token"] = csrfToken;
+    }
     const response = await fetch(
       `${VITE_BASE_URL.replace("/games", "")}/data`,
       {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers,
         credentials: "include", // Include cookies for authentication
       },
     );
@@ -208,13 +214,44 @@ export async function registerUser(userData) {
 
     const data = await response.json();
 
+    // Store CSRF token if provided
+    if (data?.data?.csrfToken) {
+      localStorage.setItem('csrfToken', data.data.csrfToken);
+    }
     if (!response.ok) {
       throw new Error(data.message || data.error || 'Registration failed');
     }
-
     return data;
   } catch (err) {
     console.error('Registration error:', err);
+    throw err;
+  }
+}
+
+export async function loginUser(credentials) {
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(credentials),
+      credentials: 'include'
+    });
+
+    const data = await response.json();
+
+    // Store CSRF token if provided
+    if (data?.data?.csrfToken) {
+      localStorage.setItem('csrfToken', data.data.csrfToken);
+    }
+    if (!response.ok) {
+      throw new Error(data.message || data.error || 'Login failed');
+    }
+    return data;
+  } catch (err) {
+    console.error('Login error:', err);
     throw err;
   }
 }

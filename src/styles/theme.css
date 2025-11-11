@@ -249,12 +249,18 @@ body {
   appearance: none;
   border: none;
   background: transparent;
-  color: inherit;
+  color: var(--ink);
   font: inherit;
   font-weight: 800;
   outline: none;
   padding-right: 10px;
   cursor: pointer;
+}
+
+.select select option {
+  background: var(--card-bg);
+  color: var(--ink);
+  font-weight: 700;
 }
 
 /* Knappar (rundade) */

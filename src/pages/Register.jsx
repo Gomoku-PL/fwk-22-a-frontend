@@ -23,7 +23,7 @@ export default function Register() {
 
       setSuccess(true);
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 2000);
     } catch (err) {
       setError(err.message || "Registration failed. Please try again.");
@@ -78,7 +78,7 @@ export default function Register() {
                 fontSize: "var(--fs-ui)",
               }}
             >
-              Redirecting to home page...
+              Redirecting to login page...
             </p>
           </div>
         </section>
@@ -87,62 +87,50 @@ export default function Register() {
   }
 
   return (
-   
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 700px 1fr",
-          gridTemplateRows: "auto auto",
-          gap: "2rem",
-          minHeight: "calc(100vh - 4rem)",
-        }}
-      >
-        {/* Empty left column */}
-        <div></div>
-
-        {/* Error message in center column */}
-        {error && (
-          <div
-            style={{
-              padding: "1rem",
-              backgroundColor: "rgba(239, 68, 68, 0.1)",
-              color: "var(--ink)",
-              border: "1px solid rgba(239, 68, 68, 0.3)",
-              borderRadius: "8px",
-              gridColumn: "1 / span 3",
-            }}
-          >
-            <strong>Error:</strong> {error}
-          </div>
-        )}
-
-        {/* Empty right column */}
-        <div></div>
-
-        {/* Empty left column */}
-        <div></div>
-
-        {/* RegisterForm in center column */}
+    <div
+      style={{
+        gridColumn: "1 / -1",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "calc(100vh - 200px)",
+        padding: "2rem",
+      }}
+    >
+      {/* Error message */}
+      {error && (
         <div
           style={{
-            gridColumn: "2",
-            position: "relative",
-            left: "195px" /* 👈 ADJUST THIS: negative = left, positive = right */,
-            top: "0px" /* 👈 ADJUST THIS: negative = up, positive = down */,
+            width: "100%",
+            maxWidth: "700px",
+            padding: "1rem",
+            backgroundColor: "rgba(239, 68, 68, 0.1)",
+            color: "var(--ink)",
+            border: "1px solid rgba(239, 68, 68, 0.3)",
+            borderRadius: "8px",
+            marginBottom: "1rem",
           }}
         >
-          <RegisterForm
-            onSubmit={handleSubmit}
-            onCancel={handleCancel}
-            disabled={isLoading}
-            showValidation={true}
-            isModal={false}
-          />
+          <strong>Error:</strong> {error}
         </div>
+      )}
 
-        {/* Empty right column */}
-        <div></div>
+      {/* RegisterForm centered */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "700px",
+        }}
+      >
+        <RegisterForm
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          disabled={isLoading}
+          showValidation={true}
+          isModal={false}
+        />
       </div>
-
+    </div>
   );
 }

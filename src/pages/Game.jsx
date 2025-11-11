@@ -4,6 +4,7 @@ import { Sidebar, StatusBar, BoardWrapper } from "@gomoku/components";
 import { socket, connect, on, off, joinRoom } from "../lib/socket";
 
 import engine from "../lib/engine";
+import { getBotMove } from "../lib/bot";
 
 export default function Game() {
   const roomId = "room1";
@@ -12,6 +13,8 @@ export default function Game() {
   const [moves, setMoves] = useState([]);
   const [winner, setWinner] = useState(null);
   const [gameWon, setGameWon] = useState(false);
+  const [gameMode, setGameMode] = useState("2-player");
+  const [difficulty, setDifficulty] = useState("NORMAL");
 
   const moveCount = moves.length;
   const currentPlayer = moveCount % 2 === 0 ? "B" : "W";
@@ -72,23 +75,68 @@ export default function Game() {
 
   const handleMyMove = ({ row, col }) => {
     if (gameWon) return;
+    
     setMoves((prev) => {
       const next = [...prev, { row, col, by: "me", at: Date.now() }];
       const b = buildBoard(boardSize, next);
       const p = (next.length - 1) % 2 === 0 ? "B" : "W";
+      
       if (engine.checkWin(b, row, col, p)) {
         setWinner(p);
         setGameWon(true);
+        return next;
       }
+
+      // If playing against bot, make bot move after player
+      if (gameMode === "vs-bot" && !gameWon) {
+        setTimeout(() => {
+          const botPlayer = p === "B" ? "W" : "B";
+          const botMove = getBotMove(b, botPlayer, difficulty);
+          
+          if (botMove) {
+            setMoves((prevMoves) => {
+              const botMoveData = { 
+                row: botMove.row, 
+                col: botMove.col, 
+                by: "bot", 
+                at: Date.now() 
+              };
+              const nextWithBot = [...prevMoves, botMoveData];
+              const boardWithBot = buildBoard(boardSize, nextWithBot);
+              
+              if (engine.checkWin(boardWithBot, botMove.row, botMove.col, botPlayer)) {
+                setWinner(botPlayer);
+                setGameWon(true);
+              }
+              
+              return nextWithBot;
+            });
+          }
+        }, 500); // Small delay for better UX
+      }
+
       return next;
     });
-    socket.emit("move", { row, col, player: socket.id, roomId });
+
+    // Emit to socket for multiplayer mode
+    if (gameMode === "2-player") {
+      socket.emit("move", { row, col, player: socket.id, roomId });
+    }
   };
 
   const onRestart = () => {
     setMoves([]);
     setWinner(null);
     setGameWon(false);
+  };
+
+  const handleGameModeChange = (mode) => {
+    setGameMode(mode);
+    onRestart(); // Reset game when mode changes
+  };
+
+  const handleDifficultyChange = (diff) => {
+    setDifficulty(diff);
   };
 
   const board = buildBoard(boardSize, moves);
@@ -105,7 +153,12 @@ export default function Game() {
 
   return (
     <>
-      <Sidebar onStartGame={onRestart} onRestart={onRestart} />
+      <Sidebar 
+        onStartGame={onRestart} 
+        onRestart={onRestart}
+        onGameModeChange={handleGameModeChange}
+        onDifficultyChange={handleDifficultyChange}
+      />
 
       <section className="card board-card">
         {gameWon && (

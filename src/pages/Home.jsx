@@ -5,12 +5,23 @@ import { Sidebar } from "@gomoku/components";
 export default function Home() {
   const navigate = useNavigate();
 
+  // Simple login state validator
+  const isLoggedIn = Boolean(localStorage.getItem("authToken"));
+
   const handleStartGame = () => {
     navigate("/game/room1");
   };
 
   const handleRegister = () => {
     navigate("/register");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const handleProfile = () => {
+    navigate("/profile");
   };
 
   return (
@@ -73,13 +84,36 @@ export default function Home() {
                 🎮 Starta nytt spel
               </button>
 
-              <button
-                className="btn-ghost"
-                onClick={handleRegister}
-                style={{ width: "100%" }}
-              >
-                <span className="txt">👤 Skapa konto</span>
-              </button>
+              {/* Show register/login only if not logged in */}
+              {!isLoggedIn && (
+                <>
+                  <button
+                    className="btn-ghost"
+                    onClick={handleRegister}
+                    style={{ width: "100%" }}
+                  >
+                    <span className="txt">👤 Skapa konto</span>
+                  </button>
+                  <button
+                    className="btn-ghost"
+                    onClick={handleLogin}
+                    style={{ width: "100%" }}
+                  >
+                    <span className="txt">🔑 Logga in</span>
+                  </button>
+                </>
+              )}
+
+              {/* Show profile button if logged in */}
+              {isLoggedIn && (
+                <button
+                  className="btn-ghost"
+                  onClick={handleProfile}
+                  style={{ width: "100%" }}
+                >
+                  <span className="txt">👤 Profil</span>
+                </button>
+              )}
 
               <div
                 style={{
